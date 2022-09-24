@@ -1,0 +1,68 @@
+global:
+  scrape_interval:     30s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 30s # Evaluate rules every 15 seconds.
+
+  # Attach these extra labels to all timeseries collected by this Prometheus instance.
+  external_labels:
+    monitor: 'boavizta-cloud-scanner'
+
+rule_files:
+  - 'prometheus.rules.yml'
+
+scrape_configs:
+
+  - job_name:       'cloud-scanner-metrics-fra'
+    # https://YOUR-API-ID.execute-api.eu-west-1.amazonaws.com/dev/metrics?aws_region=eu-west-3
+    # Override the global default and scrape targets from this job every 30 seconds.
+    # scrape_interval: 30s
+    scheme: https
+    static_configs:
+      - targets: ['YOUR-API-ID.execute-api.eu-west-1.amazonaws.com']
+        labels:
+          group: 'production'
+    # The HTTP resource path on which to fetch metrics from targets.
+    #[ metrics_path: <path> | default = /metrics ]
+    metrics_path: '/dev/metrics'
+    # Optional HTTP URL parameters.
+    params:
+      aws_region: ['eu-west-3']
+
+  - job_name:       'cloud-scanner-metrics-irl'
+  # https://YOUR-API-ID.execute-api.eu-west-1.amazonaws.com/dev/metrics?aws_region=eu-west-1
+  # Override the global default and scrape targets from this job every 30 seconds.
+  # scrape_interval: 30s
+    scheme: https
+    static_configs:
+      - targets: ['YOUR-API-ID.execute-api.eu-west-1.amazonaws.com']
+        labels:
+          group: 'production'
+    # The HTTP resource path on which to fetch metrics from targets.
+    #[ metrics_path: <path> | default = /metrics ]
+    metrics_path: '/dev/metrics'
+    # Optional HTTP URL parameters.
+    params:
+      aws_region: ['eu-west-1']
+
+  - job_name:       'cloud-scanner-metrics-de'
+  # https://YOUR-API-ID.execute-api.eu-west-1.amazonaws.com/dev/metrics?aws_region=eu-central-1
+  # Override the global default and scrape targets from this job every 30 seconds.
+  # scrape_interval: 30s
+    scheme: https
+    static_configs:
+      - targets: ['YOUR-API-ID.execute-api.eu-west-1.amazonaws.com']
+        labels:
+          group: 'production'
+    # The HTTP resource path on which to fetch metrics from targets.
+    #[ metrics_path: <path> | default = /metrics ]
+    metrics_path: '/dev/metrics'
+    # Optional HTTP URL parameters.
+    params:
+      aws_region: ['eu-central-1']
+
+# Optional: push metics to a remote prometheus instance (SAAS prometheus / grafana)
+# You get username and password from your prometheus SAAS dashboard.
+remote_write:
+  - url: https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push
+    basic_auth:
+      username: <EDITED>
+      password: <EDITED>
