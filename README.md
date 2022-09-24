@@ -1,4 +1,4 @@
-# cs-prom
+# cloud-scanner-prom-config
 
 A basic prometheus config to scrape metrics from Boavizta Cloud scanner when deployed as a serverless application.
 
