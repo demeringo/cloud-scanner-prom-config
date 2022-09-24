@@ -4,6 +4,8 @@ A basic prometheus config to scrape metrics from Boavizta Cloud scanner when dep
 
 See  [GitHub - Boavizta/cloud-scanner: 📡 Get Boavizta impact data for your aws cloud account usage.](https://github.com/Boavizta/cloud-scanner/).
 
+![image](dashboard-screenshot.png)
+
 ## Usage
 
 Copy `prometheus.template.yml` into `prometheus.yml`
@@ -18,6 +20,8 @@ Copy `prometheus.template.yml` into `prometheus.yml`
 ```
 
 Access prometheus UI at: <http://localhost:9090/>
+
+Import the template dashboard to your Grafana instance(`grafana-dashboard.template.json`). You may have to adapt the datasource in Grafana.
 
 ## About
 
