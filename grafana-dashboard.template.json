@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "Environmental impacts of aws EC2 instances of account account",
+  "description": "Environmental impacts of aws EC2 instances of account",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -91,7 +91,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -156,7 +156,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -232,7 +232,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 9,
+        "w": 10,
         "x": 14,
         "y": 0
       },
@@ -262,7 +262,7 @@
           "refId": "Number of instances"
         }
       ],
-      "title": "Number of instances",
+      "title": "Number of instances (taken into assessment)",
       "type": "timeseries"
     },
     {
@@ -314,7 +314,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -384,7 +384,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -495,7 +495,7 @@
           "refId": "PE use"
         }
       ],
-      "title": "Pe use",
+      "title": "Primary Energy Factor (use) MJ/kWh",
       "type": "timeseries"
     },
     {
@@ -547,7 +547,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -613,7 +613,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -629,6 +629,99 @@
       ],
       "title": "adp use",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "grafanacloud-prom"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "MJ"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 11
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "grafanacloud-prom"
+          },
+          "editorMode": "builder",
+          "expr": "boavizta_gwp_use_kgco2eq",
+          "legendFormat": "{{country}} ({{awsregion}})",
+          "range": true,
+          "refId": "PE use"
+        }
+      ],
+      "title": "Global Warming Potential (of use) in kgco2eq",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -679,7 +772,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -749,7 +842,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.5-0100a6a",
+      "pluginVersion": "9.2.1-2dc128b",
       "targets": [
         {
           "datasource": {
@@ -824,15 +917,15 @@
               }
             ]
           },
-          "unit": "MJ"
+          "unit": "kgsbeq"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 18
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 17
       },
       "id": 8,
       "options": {
@@ -854,16 +947,17 @@
             "uid": "grafanacloud-prom"
           },
           "editorMode": "builder",
-          "expr": "boavizta_pe_manufacture_megajoules",
+          "expr": "boavizta_adp_manufacture_kgsbeq",
           "legendFormat": "{{country}} ({{awsregion}})",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Pe Manuf",
+      "title": "Abiotic Resource Depletion (Manufacture) kgsbeq",
       "type": "timeseries"
     }
   ],
+  "refresh": false,
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -872,7 +966,7 @@
       {
         "current": {
           "isNone": true,
-          "selected": true,
+          "selected": false,
           "text": "None",
           "value": ""
         },
@@ -896,13 +990,13 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Boavizta-cloud-scan-account",
   "uid": "6yzp5T6nz",
-  "version": 10,
+  "version": 16,
   "weekStart": ""
 }
